@@ -98,6 +98,9 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+    # Ensure participants list is unique
+    activity["participants"] = list(set(activity["participants"]))
+
     # Check if the email is already signed up
     if email in activity["participants"]:
         raise HTTPException(status_code=400, detail="Already signed up")
